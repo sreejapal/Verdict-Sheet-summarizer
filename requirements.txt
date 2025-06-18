@@ -1,0 +1,7 @@
+kaggle
+PyMuPDF
+transformers
+torch
+scikit-learn
+streamlit
+fpdf

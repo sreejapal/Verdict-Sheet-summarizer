@@ -1,0 +1,16 @@
+# Ignore large files and models
+model/
+my_custom_summarizer/
+pdfs/
+structured_summaries/
+*.zip
+*.safetensors
+*.pt
+
+# Python env
+env/
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
