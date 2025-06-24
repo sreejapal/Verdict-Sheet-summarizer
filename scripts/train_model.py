@@ -3,8 +3,9 @@ from transformers import BartTokenizer, BartForConditionalGeneration, TrainingAr
 import torch
 
 # Load dataset
+# Use all data for training (no split)
 dataset = load_dataset("csv", data_files={"train": "./data/train.csv"})
-dataset = dataset["train"].train_test_split(test_size=0.1)
+dataset = dataset["train"]
 
 # Tokenizer and model
 model_name = "facebook/bart-base"
@@ -23,20 +24,20 @@ tokenized_dataset = dataset.map(tokenize, batched=True, remove_columns=["text", 
 # Training args
 args = TrainingArguments(
     output_dir="./my_custom_summarizer",
-    per_device_train_batch_size=2,
-    per_device_eval_batch_size=2,
+    per_device_train_batch_size=1,
+    per_device_eval_batch_size=1,
     num_train_epochs=3,
     logging_dir="./logs",
     save_total_limit=2,
     save_strategy="epoch",
-    logging_steps=10,
+    logging_steps=1,
 )
 
 trainer = Trainer(
     model=model,
     args=args,
-    train_dataset=tokenized_dataset["train"],
-    eval_dataset=tokenized_dataset["test"]
+    train_dataset=tokenized_dataset,
+    # No eval_dataset
 )
 
 # Train

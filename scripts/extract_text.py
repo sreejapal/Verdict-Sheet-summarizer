@@ -1,6 +1,6 @@
 import os
 
-pdf_root_folder = "data/pdfs"
+pdf_root_folder = "data/train_files"
 output_folder = "data/texts"
 os.makedirs(output_folder, exist_ok=True)
 
