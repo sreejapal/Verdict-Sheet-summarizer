@@ -4,6 +4,7 @@ from fpdf import FPDF
 import uuid
 import sys
 from werkzeug.utils import secure_filename
+import time
 
 # Set up absolute paths
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -19,7 +20,7 @@ sys.path.append(BASE_DIR)
 
 # Import your functions
 from scripts.extract_text import extract_text_from_pdf
-from my_custom_summarizer.summarize import summarize_text
+from scripts.extract_sections_from_text import extract_all_sections, format_sections
 
 # Initialize Flask app
 app = Flask(__name__, template_folder=os.path.join(BASE_DIR, 'templates'), static_folder=os.path.join(BASE_DIR, 'static'))
@@ -48,7 +49,14 @@ def summarize():
 
         # Extract text and summarize
         extracted_text = extract_text_from_pdf(pdf_path)
-        summary = summarize_text(extracted_text)
+        limited_text = extracted_text[:4000]
+        print(f"[INFO] Extracted text length: {len(extracted_text)} | Using first {len(limited_text)} chars for section extraction.")
+        start_time = time.time()
+        sections = extract_all_sections(limited_text)
+        summary = format_sections(sections)
+        print(f"[INFO] Section extraction output:\n{sections}\n---END SECTION EXTRACTION---")
+        elapsed = time.time() - start_time
+        print(f"[INFO] Section extraction took {elapsed:.2f} seconds.")
 
         # Create summary PDF
         summary_filename = f"summary_{filename}"

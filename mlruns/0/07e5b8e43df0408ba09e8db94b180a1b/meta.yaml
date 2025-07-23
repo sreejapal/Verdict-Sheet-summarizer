@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/t_pal/Documents/python/law_summariser/mlruns/0/07e5b8e43df0408ba09e8db94b180a1b/artifacts
+end_time: 1752762545121
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 07e5b8e43df0408ba09e8db94b180a1b
+run_name: ./my_custom_summarizer
+run_uuid: 07e5b8e43df0408ba09e8db94b180a1b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752762497011
+status: 3
+tags: []
+user_id: t_pal
